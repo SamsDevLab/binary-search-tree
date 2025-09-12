@@ -1,0 +1,13 @@
+{
+  "name": "binary-search-tree",
+  "version": "1.0.1",
+  "description": "Binary Search Tree mini project",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
