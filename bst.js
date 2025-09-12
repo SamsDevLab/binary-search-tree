@@ -12,6 +12,20 @@ export class Tree {
   constructor(array) {
     this.root = buildTree(array);
   }
+
+  insert(root, value) {
+    if (root === null) return new Node(value);
+
+    if (root.data === value) return root;
+
+    if (value < root.data) {
+      root.left = this.insert(root.left, value);
+    } else if (value > root.data) {
+      root.right = this.insert(root.right, value);
+    }
+
+    return root;
+  }
 }
 
 const createNodeRecursively = (arr, start, end) => {
@@ -36,21 +50,19 @@ const buildTree = (array) => {
 
   const root = createNodeRecursively(uniqueArr, start, end);
 
-  // Print Binary Tree
-  const prettyPrint = (node, prefix = "", isLeft = true) => {
-    if (node === null) {
-      return;
-    }
-    if (node.right !== null) {
-      prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
-    }
-    console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
-    if (node.left !== null) {
-      prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
-    }
-  };
-
-  prettyPrint(root);
-
   return root;
+};
+
+// Print Binary Tree
+export const prettyPrint = (node, prefix = "", isLeft = true) => {
+  if (node === null) {
+    return;
+  }
+  if (node.right !== null) {
+    prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+  }
+  console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
+  if (node.left !== null) {
+    prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+  }
 };
