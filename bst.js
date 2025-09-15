@@ -13,11 +13,24 @@ export class Tree {
     this.root = this.buildTree(array);
   }
 
+  recursivelyInsert(root, value) {
+    if (root === null) return new Node(value);
+
+    if (value < root.data) {
+      root.left = this.recursivelyInsert(root.left, value);
+    } else if (value > root.data) {
+      root.right = this.recursivelyInsert(root.right, value);
+    }
+
+    return root;
+  }
+
   insert(value) {
     const root = this.root;
 
-    console.log(root);
-    console.log(value);
+    if (root.data === value) return root;
+
+    this.recursivelyInsert(root, value);
   }
 
   createNodeRecursively(arr, start, end) {
@@ -60,17 +73,3 @@ export const prettyPrint = (node, prefix = "", isLeft = true) => {
     prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
   }
 };
-
-// insert(root, value) {
-//   if (root === null) return new Node(value);
-
-//   if (root.data === value) return root;
-
-//   if (value < root.data) {
-//     root.left = this.insert(root.left, value);
-//   } else if (value > root.data) {
-//     root.right = this.insert(root.right, value);
-//   }
-
-//   return root;
-// }
