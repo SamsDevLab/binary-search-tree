@@ -13,6 +13,35 @@ export class Tree {
     this.root = this.buildTree(array);
   }
 
+  /*************************/
+
+  createNodeRecursively(arr, start, end) {
+    if (start > end) return null;
+
+    let mid = Math.floor((start + end) / 2);
+
+    const root = new Node(arr[mid]);
+
+    root.left = this.createNodeRecursively(arr, start, mid - 1);
+    root.right = this.createNodeRecursively(arr, mid + 1, end);
+
+    return root;
+  }
+
+  buildTree(array) {
+    const sortedArr = array.sort((a, b) => a - b);
+    const uniqueArr = [...new Set(sortedArr)];
+
+    const start = 0;
+    const end = uniqueArr.length - 1;
+
+    const root = this.createNodeRecursively(uniqueArr, start, end);
+
+    return root;
+  }
+
+  /*************************/
+
   recursivelyInsert(root, value) {
     if (root === null) return new Node(value);
 
@@ -33,30 +62,58 @@ export class Tree {
     this.recursivelyInsert(root, value);
   }
 
-  createNodeRecursively(arr, start, end) {
-    if (start > end) return null;
+  /*************************/
 
-    let mid = Math.floor((start + end) / 2);
+  getSuccessor(root) {
+    let current = root.right;
 
-    const root = new Node(arr[mid]);
+    while (current.left !== null) {
+      current = current.left;
+    }
 
-    root.left = this.createNodeRecursively(arr, start, mid - 1);
-    root.right = this.createNodeRecursively(arr, mid + 1, end);
+    return current;
+  }
+
+  /*
+  Pseudo:
+1. Check to see if root === null.
+  - If so, return 'root' as this means you have hit the end of the line
+    without finding the value (it's not in the binary search tree)
+2. Check if value < root
+  - If so, you'll need to recurse left until you find value
+3. Check if value > root
+  - If so, you'll need to recurse right until you find value
+4. Once the value is found you'll need to see if it has children
+  */
+
+  deleteNode(root, value) {
+    if (root === null) return root;
+
+    if (root.data > value) {
+      root.left = this.deleteNode(root.left, value);
+    } else if (root.data < value) {
+      root.right = this.deleteNode(root.right, value);
+    } else {
+      if (root.left === null) {
+        return root.right;
+      }
+
+      if (root.right === null) {
+        return root.left;
+      }
+
+      const successor = this.getSuccessor(root);
+      root.data = successor.data;
+      root.right = this.deleteNode(root.right, successor.data);
+    }
 
     return root;
   }
 
-  buildTree(array) {
-    console.log(array);
-    const sortedArr = array.sort((a, b) => a - b);
-    const uniqueArr = [...new Set(sortedArr)];
+  delete(value) {
+    const root = this.root;
 
-    const start = 0;
-    const end = uniqueArr.length - 1;
-
-    const root = this.createNodeRecursively(uniqueArr, start, end);
-
-    return root;
+    this.deleteNode(root, value);
   }
 }
 
