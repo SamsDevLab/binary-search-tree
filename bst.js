@@ -74,18 +74,6 @@ export class Tree {
     return current;
   }
 
-  /*
-  Pseudo:
-1. Check to see if root === null.
-  - If so, return 'root' as this means you have hit the end of the line
-    without finding the value (it's not in the binary search tree)
-2. Check if value < root
-  - If so, you'll need to recurse left until you find value
-3. Check if value > root
-  - If so, you'll need to recurse right until you find value
-4. Once the value is found you'll need to see if it has children
-  */
-
   deleteNode(root, value) {
     if (root === null) return root;
 
@@ -114,6 +102,40 @@ export class Tree {
     const root = this.root;
 
     this.deleteNode(root, value);
+  }
+
+  /*************************/
+
+  /* 
+  Pseudo:
+  - If 'root' becomes 'null' return root.
+    - This means we have hit the 'end of the line'
+  
+  
+  */
+
+  findNode(root, value) {
+    if (root === null) return root;
+
+    if (root.data > value) {
+      let foundNode = this.findNode(root.left, value);
+      return foundNode;
+    } else if (root.data < value) {
+      let foundNode = this.findNode(root.right, value);
+      return foundNode;
+    } else if (root.data === value) {
+      return root;
+    }
+
+    return foundNode;
+  }
+
+  find(value) {
+    const root = this.root;
+
+    const foundNode = this.findNode(root, value);
+
+    return foundNode;
   }
 }
 
