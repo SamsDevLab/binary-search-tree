@@ -173,6 +173,70 @@ export class Tree {
 
     iterateLevelOrder(callback);
   }
+
+  /*************************/
+
+  // Visit <left> <root> <right>
+  inOrderForEach(callback) {
+    if (typeof callback !== "function") {
+      throw new Error("Callback function is required");
+    }
+
+    const rootNode = this.root;
+
+    const inOrderRecursion = (rootNode, callback) => {
+      if (rootNode === null) return;
+
+      inOrderRecursion(rootNode.left, callback);
+      console.log(callback(rootNode));
+      inOrderRecursion(rootNode.right, callback);
+    };
+
+    inOrderRecursion(rootNode, callback);
+  }
+
+  //----
+
+  // - Visit <root> <left> <right>
+  preOrderForEach(callback) {
+    if (typeof callback !== "function") {
+      throw new Error("Callback function is required");
+    }
+
+    const rootNode = this.root;
+
+    const preOrderRecursion = (rootNode, callback) => {
+      if (rootNode === null) return;
+
+      console.log(callback(rootNode));
+
+      preOrderRecursion(rootNode.left, callback);
+      preOrderRecursion(rootNode.right, callback);
+    };
+
+    preOrderRecursion(rootNode, callback);
+  }
+
+  //----
+
+  // - Visit <left> <right> <root>
+  postOrderForEach(callback) {
+    if (typeof callback !== "function") {
+      throw new Error("Callback function is required");
+    }
+
+    const rootNode = this.root;
+
+    const postOrderRecursion = (rootNode, callback) => {
+      if (rootNode === null) return;
+
+      postOrderRecursion(rootNode.right, callback);
+      postOrderRecursion(rootNode.left, callback);
+      console.log(callback(rootNode));
+    };
+
+    postOrderRecursion(rootNode, callback);
+  }
 }
 
 // Print Binary Tree
