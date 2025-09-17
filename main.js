@@ -16,6 +16,14 @@ const newTree = new Tree(arr);
 
 // 'Find' Method
 // console.log(newTree.find(5));
-console.log(newTree.find(67));
+// console.log(newTree.find(67));
 
-prettyPrint(newTree.root);
+// 'Level Order For Each' Method
+const multiplyNodeByTwo = (node) => {
+  const product = node.data * 2;
+
+  return product;
+};
+newTree.levelOrderForEach(multiplyNodeByTwo);
+
+// prettyPrint(newTree.root);
