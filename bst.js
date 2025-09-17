@@ -106,14 +106,6 @@ export class Tree {
 
   /*************************/
 
-  /* 
-  Pseudo:
-  - If 'root' becomes 'null' return root.
-    - This means we have hit the 'end of the line'
-  
-  
-  */
-
   findNode(root, value) {
     if (root === null) return root;
 
@@ -136,6 +128,50 @@ export class Tree {
     const foundNode = this.findNode(root, value);
 
     return foundNode;
+  }
+
+  /*************************/
+
+  levelOrderForEach(callback) {
+    if (typeof callback !== "function") {
+      throw new Error("Callback function is required");
+    }
+
+    const queue = [this.root];
+
+    const recurseLevelOrder = (callback) => {
+      if (queue.length === 0) return;
+
+      const visitedNode = queue.shift();
+
+      if (visitedNode.left !== null) queue.push(visitedNode.left);
+      if (visitedNode.right !== null) queue.push(visitedNode.right);
+
+      const callbackValue = callback(visitedNode);
+
+      console.log(callbackValue);
+
+      recurseLevelOrder(callback);
+    };
+
+    recurseLevelOrder(callback);
+
+    //----
+
+    const iterateLevelOrder = (callback) => {
+      while (queue.length !== 0) {
+        const visitedNode = queue.shift();
+
+        if (visitedNode.left !== null) queue.push(visitedNode.left);
+        if (visitedNode.right !== null) queue.push(visitedNode.right);
+
+        const callbackValue = callback(visitedNode);
+
+        console.log(callbackValue);
+      }
+    };
+
+    iterateLevelOrder(callback);
   }
 }
 
