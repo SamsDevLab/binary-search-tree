@@ -24,6 +24,15 @@ const multiplyNodeByTwo = (node) => {
 
   return product;
 };
-newTree.levelOrderForEach(multiplyNodeByTwo);
+// newTree.levelOrderForEach(multiplyNodeByTwo);
+
+// 'Pre Order For Each'
+// newTree.preOrderForEach(multiplyNodeByTwo);
+
+// 'In Order For Each'
+// newTree.inOrderForEach(multiplyNodeByTwo);
+
+// 'Post Order For Each
+newTree.postOrderForEach(multiplyNodeByTwo);
 
 // prettyPrint(newTree.root);
