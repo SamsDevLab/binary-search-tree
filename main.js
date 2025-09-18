@@ -41,6 +41,9 @@ const multiplyNodeByTwo = (node) => {
 // newTree.postOrderForEach(multiplyNodeByTwo);
 
 // 'Height Method'
-console.log(newTree.height(67));
+// console.log(newTree.height(67));
+
+// 'Depth Method'
+console.log(newTree.depth(7));
 
 prettyPrint(newTree.root);
