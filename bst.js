@@ -237,6 +237,38 @@ export class Tree {
 
     postOrderRecursion(rootNode, callback);
   }
+
+  /*************************/
+
+  /*
+  - Use while loop to find 'root' node based on value
+  - Recurse to a leaf node (longest path to the leaf node)
+    - Will need to find this by looking at right/left children of node and THEIR children
+  - Measure the node that contains passed value from the leaf node
+  - Can use a counter variable to count from leaf node to root
+
+Start here tomorrow. What you have below is correct but whiteboard it and walk through
+each step before moving on. Ensure that you understand it
+  */
+
+  height(value) {
+    const targetNode = this.find(value);
+
+    if (targetNode === null) return null;
+
+    const findHeight = (root) => {
+      if (root === null) return -1;
+
+      const leftHeight = findHeight(root.left);
+      const rightHeight = findHeight(root.right);
+
+      return Math.max(leftHeight, rightHeight) + 1;
+    };
+
+    const total = findHeight(targetNode);
+
+    return total;
+  }
 }
 
 // Print Binary Tree
