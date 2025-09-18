@@ -10,6 +10,11 @@ const newTree = new Tree(arr);
 // 'Insert' Method:
 // newTree.insert(2);
 // newTree.insert(6);
+// newTree.insert(22);
+// newTree.insert(24);
+// newTree.insert(25);
+// newTree.insert(21);
+// newTree.insert(20);
 
 // 'Delete' Method:
 // newTree.delete(1);
@@ -18,7 +23,7 @@ const newTree = new Tree(arr);
 // console.log(newTree.find(5));
 // console.log(newTree.find(67));
 
-// 'Level Order For Each' Method
+// 'Level Order For Each' Method w/ Callback
 const multiplyNodeByTwo = (node) => {
   const product = node.data * 2;
 
@@ -33,6 +38,9 @@ const multiplyNodeByTwo = (node) => {
 // newTree.inOrderForEach(multiplyNodeByTwo);
 
 // 'Post Order For Each
-newTree.postOrderForEach(multiplyNodeByTwo);
+// newTree.postOrderForEach(multiplyNodeByTwo);
 
-// prettyPrint(newTree.root);
+// 'Height Method'
+console.log(newTree.height(67));
+
+prettyPrint(newTree.root);
