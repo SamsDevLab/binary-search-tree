@@ -240,17 +240,6 @@ export class Tree {
 
   /*************************/
 
-  /*
-  - Use while loop to find 'root' node based on value
-  - Recurse to a leaf node (longest path to the leaf node)
-    - Will need to find this by looking at right/left children of node and THEIR children
-  - Measure the node that contains passed value from the leaf node
-  - Can use a counter variable to count from leaf node to root
-
-Start here tomorrow. What you have below is correct but whiteboard it and walk through
-each step before moving on. Ensure that you understand it
-  */
-
   height(value) {
     const targetNode = this.find(value);
 
@@ -266,6 +255,30 @@ each step before moving on. Ensure that you understand it
     };
 
     const total = findHeight(targetNode);
+
+    return total;
+  }
+
+  /*************************/
+
+  depth(value) {
+    const targetNode = this.find(value);
+
+    if (targetNode === null) return null;
+
+    const root = this.root;
+
+    const findDepth = (root, targetNode) => {
+      if (root.data > targetNode.data) {
+        return findDepth(root.left, targetNode) + 1;
+      } else if (root.data < targetNode.data) {
+        return findDepth(root.right, targetNode) + 1;
+      } else {
+        return 0;
+      }
+    };
+
+    const total = findDepth(root, targetNode);
 
     return total;
   }
