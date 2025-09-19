@@ -227,8 +227,8 @@ export class Tree {
     const postOrderRecursion = (rootNode, callback) => {
       if (rootNode === null) return;
 
-      postOrderRecursion(rootNode.right, callback);
       postOrderRecursion(rootNode.left, callback);
+      postOrderRecursion(rootNode.right, callback);
       callback(rootNode);
     };
 
@@ -327,6 +327,48 @@ export class Tree {
     this.root = this.buildTree(newArr);
   }
 }
+
+const arrOfRandomNums = (length, max) => {
+  const arr = Array.from({ length }, () => Math.floor(Math.random() * max) + 1);
+  return arr;
+};
+
+const bstScriptCallback = (node) => {
+  console.log(node.data);
+};
+
+export const bstScript = () => {
+  const numArr = arrOfRandomNums(100, 100);
+
+  const tree = new Tree(numArr);
+  console.log(tree);
+
+  const balanced = tree.isBalanced();
+  console.log(balanced);
+
+  tree.levelOrderForEach(bstScriptCallback);
+  tree.preOrderForEach(bstScriptCallback);
+  tree.postOrderForEach(bstScriptCallback);
+  tree.inOrderForEach(bstScriptCallback);
+
+  tree.insert(105);
+  tree.insert(110);
+  tree.insert(125);
+
+  prettyPrint(tree.root);
+
+  tree.rebalance();
+
+  prettyPrint(tree.root);
+
+  const rebalanced = tree.isBalanced();
+  console.log(rebalanced);
+
+  tree.levelOrderForEach(bstScriptCallback);
+  tree.preOrderForEach(bstScriptCallback);
+  tree.postOrderForEach(bstScriptCallback);
+  tree.inOrderForEach(bstScriptCallback);
+};
 
 // Print Binary Tree
 export const prettyPrint = (node, prefix = "", isLeft = true) => {
