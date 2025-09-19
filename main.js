@@ -2,15 +2,16 @@
 
 import { Tree } from "./bst.js";
 import { prettyPrint } from "./bst.js";
+import { bstScript } from "./bst.js";
 
 const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 
 const newTree = new Tree(arr);
 
 // 'Insert' Method:
-newTree.insert(6500);
-newTree.insert(6750);
-newTree.insert(7000);
+// newTree.insert(6500);
+// newTree.insert(6750);
+// newTree.insert(7000);
 
 // 'Delete' Method:
 // newTree.delete(1);
@@ -46,7 +47,10 @@ const multiplyNodeByTwo = (node) => {
 // console.log(newTree.isBalanced());
 
 // 'Rebalance' Method
-newTree.rebalance();
+// newTree.rebalance();
 
-prettyPrint(newTree.root);
+// BST Script
+// bstScript();
+
+// prettyPrint(newTree.root);
 // prettyPrint(rebalancedArr);
