@@ -50,7 +50,7 @@ const multiplyNodeByTwo = (node) => {
 // newTree.rebalance();
 
 // BST Script
-// bstScript();
+bstScript();
 
 // prettyPrint(newTree.root);
 // prettyPrint(rebalancedArr);
