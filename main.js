@@ -8,9 +8,9 @@ const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const newTree = new Tree(arr);
 
 // 'Insert' Method:
-// newTree.insert(6500);
-// newTree.insert(6750);
-// newTree.insert(7000);
+newTree.insert(6500);
+newTree.insert(6750);
+newTree.insert(7000);
 
 // 'Delete' Method:
 // newTree.delete(1);
@@ -23,7 +23,7 @@ const newTree = new Tree(arr);
 const multiplyNodeByTwo = (node) => {
   const product = node.data * 2;
 
-  return product;
+  console.log(product);
 };
 // newTree.levelOrderForEach(multiplyNodeByTwo);
 
@@ -43,6 +43,10 @@ const multiplyNodeByTwo = (node) => {
 // console.log(newTree.depth(7));
 
 // 'Is Balanced' Method
-console.log(newTree.isBalanced());
+// console.log(newTree.isBalanced());
+
+// 'Rebalance' Method
+newTree.rebalance();
 
 prettyPrint(newTree.root);
+// prettyPrint(rebalancedArr);
