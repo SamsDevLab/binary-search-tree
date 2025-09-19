@@ -8,13 +8,9 @@ const arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const newTree = new Tree(arr);
 
 // 'Insert' Method:
-// newTree.insert(2);
-// newTree.insert(6);
-// newTree.insert(22);
-// newTree.insert(24);
-// newTree.insert(25);
-// newTree.insert(21);
-// newTree.insert(20);
+// newTree.insert(6500);
+// newTree.insert(6750);
+// newTree.insert(7000);
 
 // 'Delete' Method:
 // newTree.delete(1);
@@ -31,19 +27,22 @@ const multiplyNodeByTwo = (node) => {
 };
 // newTree.levelOrderForEach(multiplyNodeByTwo);
 
-// 'Pre Order For Each'
+// 'Pre Order For Each' Method
 // newTree.preOrderForEach(multiplyNodeByTwo);
 
-// 'In Order For Each'
+// 'In Order For Each' Method
 // newTree.inOrderForEach(multiplyNodeByTwo);
 
-// 'Post Order For Each
+// 'Post Order For Each' Method
 // newTree.postOrderForEach(multiplyNodeByTwo);
 
-// 'Height Method'
+// 'Height' Method
 // console.log(newTree.height(67));
 
-// 'Depth Method'
-console.log(newTree.depth(7));
+// 'Depth' Method
+// console.log(newTree.depth(7));
+
+// 'Is Balanced' Method
+console.log(newTree.isBalanced());
 
 prettyPrint(newTree.root);
