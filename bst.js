@@ -109,6 +109,8 @@ export class Tree {
   findNode(root, value) {
     if (root === null) return root;
 
+    if (root.data === value) return root;
+
     if (root.data > value) {
       let foundNode = this.findNode(root.left, value);
       return foundNode;
@@ -240,21 +242,30 @@ export class Tree {
 
   /*************************/
 
+  findHeight(root) {
+    if (root === null) return -1;
+
+    const leftHeight = this.findHeight(root.left);
+    const rightHeight = this.findHeight(root.right);
+
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
+
   height(value) {
     const targetNode = this.find(value);
 
     if (targetNode === null) return null;
 
-    const findHeight = (root) => {
-      if (root === null) return -1;
+    // const findHeight = (root) => {
+    //   if (root === null) return -1;
 
-      const leftHeight = findHeight(root.left);
-      const rightHeight = findHeight(root.right);
+    //   const leftHeight = findHeight(root.left);
+    //   const rightHeight = findHeight(root.right);
 
-      return Math.max(leftHeight, rightHeight) + 1;
-    };
+    //   return Math.max(leftHeight, rightHeight) + 1;
+    // };
 
-    const total = findHeight(targetNode);
+    const total = this.findHeight(targetNode);
 
     return total;
   }
@@ -281,6 +292,55 @@ export class Tree {
     const total = findDepth(root, targetNode);
 
     return total;
+  }
+
+  /*************************/
+
+  /* 
+  Psuedo:
+  - Utlimately, return a boolean ('true' if balanced, 'false' if unbalanced)
+  - Each Node will need to check it's height and return either 'true' or 'false'
+
+  Steps:
+  - Create a checkBalance(root) fn
+  - Pass in root
+  - Check height for each subtree
+  - If false is returned exit recrusion and return false for the isBalanced call
+  - If both are true, recurse to the next nodes (isBalanced(leftTree), isBalanced(rightTree))
+  - If you recurse everything here and it's all true, return true for the isBalanced() fn
+    - This will mean the tree is balanced
+
+  */
+
+  checkBalance(root) {
+    if (root === null) return true;
+
+    const leftTree = this.findHeight(root.left);
+    const rightTree = this.findHeight(root.right);
+
+    const maxNum = Math.max(leftTree, rightTree);
+    const minNum = Math.min(leftTree, rightTree);
+
+    const result = maxNum - minNum;
+
+    if (result > 1) {
+      return false;
+    }
+
+    const leftValue = this.checkBalance(root.left);
+    const rightValue = this.checkBalance(root.right);
+
+    if (leftValue === true && rightValue === true) {
+      return true;
+    } else return false;
+  }
+
+  isBalanced() {
+    const root = this.root;
+
+    const result = this.checkBalance(root);
+
+    return result;
   }
 }
 
