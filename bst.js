@@ -149,9 +149,7 @@ export class Tree {
       if (visitedNode.left !== null) queue.push(visitedNode.left);
       if (visitedNode.right !== null) queue.push(visitedNode.right);
 
-      const callbackValue = callback(visitedNode);
-
-      console.log(callbackValue);
+      callback(visitedNode);
 
       recurseLevelOrder(callback);
     };
@@ -167,9 +165,7 @@ export class Tree {
         if (visitedNode.left !== null) queue.push(visitedNode.left);
         if (visitedNode.right !== null) queue.push(visitedNode.right);
 
-        const callbackValue = callback(visitedNode);
-
-        console.log(callbackValue);
+        callback(visitedNode);
       }
     };
 
@@ -190,7 +186,7 @@ export class Tree {
       if (rootNode === null) return;
 
       inOrderRecursion(rootNode.left, callback);
-      console.log(callback(rootNode));
+      callback(rootNode);
       inOrderRecursion(rootNode.right, callback);
     };
 
@@ -210,8 +206,7 @@ export class Tree {
     const preOrderRecursion = (rootNode, callback) => {
       if (rootNode === null) return;
 
-      console.log(callback(rootNode));
-
+      callback(rootNode);
       preOrderRecursion(rootNode.left, callback);
       preOrderRecursion(rootNode.right, callback);
     };
@@ -234,7 +229,7 @@ export class Tree {
 
       postOrderRecursion(rootNode.right, callback);
       postOrderRecursion(rootNode.left, callback);
-      console.log(callback(rootNode));
+      callback(rootNode);
     };
 
     postOrderRecursion(rootNode, callback);
@@ -255,15 +250,6 @@ export class Tree {
     const targetNode = this.find(value);
 
     if (targetNode === null) return null;
-
-    // const findHeight = (root) => {
-    //   if (root === null) return -1;
-
-    //   const leftHeight = findHeight(root.left);
-    //   const rightHeight = findHeight(root.right);
-
-    //   return Math.max(leftHeight, rightHeight) + 1;
-    // };
 
     const total = this.findHeight(targetNode);
 
@@ -296,22 +282,6 @@ export class Tree {
 
   /*************************/
 
-  /* 
-  Psuedo:
-  - Utlimately, return a boolean ('true' if balanced, 'false' if unbalanced)
-  - Each Node will need to check it's height and return either 'true' or 'false'
-
-  Steps:
-  - Create a checkBalance(root) fn
-  - Pass in root
-  - Check height for each subtree
-  - If false is returned exit recrusion and return false for the isBalanced call
-  - If both are true, recurse to the next nodes (isBalanced(leftTree), isBalanced(rightTree))
-  - If you recurse everything here and it's all true, return true for the isBalanced() fn
-    - This will mean the tree is balanced
-
-  */
-
   checkBalance(root) {
     if (root === null) return true;
 
@@ -341,6 +311,20 @@ export class Tree {
     const result = this.checkBalance(root);
 
     return result;
+  }
+
+  /*************************/
+
+  rebalance() {
+    const newArr = [];
+
+    const pushNodeValuesToArr = (node) => {
+      newArr.push(node.data);
+    };
+
+    this.inOrderForEach(pushNodeValuesToArr);
+
+    this.root = this.buildTree(newArr);
   }
 }
 
